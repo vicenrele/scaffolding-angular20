@@ -9,7 +9,11 @@ import { CommonModule } from '@angular/common';
   template: `
     <h2>Library works!</h2>
     <ul>
-      <li *ngFor="let book of books">{{ book.title }} - {{ book.author }}</li>
+      <li *ngFor="let book of books">{{ book.title }} - {{ book.author }} - 
+                                     {{ book.year }} - {{ book.genre }}
+      </li>
+      <li *ngIf="books.length === 0">No books available</li>
+      
     </ul>
   `,
   imports: [CommonModule]
@@ -18,10 +22,10 @@ export class LibraryComponent implements OnInit {
   books: IBook[] = [];
 
   constructor(
-    // @Inject(IBookService) private bookService: IBookService
+    @Inject(IBookService) private bookService: IBookService
   ) {}
 
   ngOnInit() {
-    // this.bookService.getBooks().subscribe((books: IBook[]) => this.books = books);
+    this.bookService.getBooks().subscribe((books: IBook[]) => this.books = books);
   }
 }

@@ -7,7 +7,21 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class InMemoryBookService extends IBookService {
   private books$ = new BehaviorSubject<IBook[]>([
-    { id: 1, title: '1984', author: 'George Orwell', year: 1949, genre: 'Dystopia' }
+    { id: 1, title: '1984', author: 'George Orwell', year: 1949, genre: 'Dystopia' },
+    { id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960, genre: 'Fiction' },
+    { id: 3, title: 'Brave New World', author: 'Aldous Huxley', year: 1932, genre: 'Science Fiction' },
+    { id: 4, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', year: 1925, genre: 'Classic' },
+    { id: 5, title: 'One Hundred Years of Solitude', author: 'Gabriel García Márquez', year: 1967, genre: 'Magic Realism' },
+    { id: 6, title: 'Moby-Dick', author: 'Herman Melville', year: 1851, genre: 'Adventure' },
+    { id: 7, title: 'Pride and Prejudice', author: 'Jane Austen', year: 1813, genre: 'Romance' },
+    { id: 8, title: 'The Catcher in the Rye', author: 'J.D. Salinger', year: 1951, genre: 'Coming-of-Age' },
+    { id: 9, title: 'The Hobbit', author: 'J.R.R. Tolkien', year: 1937, genre: 'Fantasy' },
+    { id: 10, title: 'Fahrenheit 451', author: 'Ray Bradbury', year: 1953, genre: 'Dystopia' },
+    { id: 11, title: 'Crime and Punishment', author: 'Fyodor Dostoevsky', year: 1866, genre: 'Psychological Fiction' },
+    { id: 12, title: 'The Brothers Karamazov', author: 'Fyodor Dostoevsky', year: 1880, genre: 'Philosophical Fiction' },
+    { id: 13, title: 'Frankenstein', author: 'Mary Shelley', year: 1818, genre: 'Gothic' },
+    { id: 14, title: 'Don Quixote', author: 'Miguel de Cervantes', year: 1605, genre: 'Satire' },
+    { id: 15, title: 'The Stranger', author: 'Albert Camus', year: 1942, genre: 'Existentialism' }
   ]);
 
   getBooks(): Observable<IBook[]> {
