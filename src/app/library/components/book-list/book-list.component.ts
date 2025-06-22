@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { IBook } from '../../../core/models/book.model';
 import { MatTableDataSource } from '@angular/material/table';
+import { BookDetailComponent } from '../book-detail/book-detail.component';
 
 @Component({
   selector: 'app-book-list',
@@ -15,7 +16,8 @@ import { MatTableDataSource } from '@angular/material/table';
     MatTableModule,
     MatPaginatorModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    BookDetailComponent
   ],
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
@@ -25,6 +27,7 @@ export class BookListComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['id', 'title', 'author', 'year', 'genre'];
   dataSource = new MatTableDataSource<IBook>([]);
+  addingNew: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -42,4 +45,25 @@ export class BookListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  // Métodos para manejar añadir, editar y eliminar
+  addBook(book: IBook) {
+    // Aquí llama al servicio para guardar, luego refresca el listado
+    this.addingNew = false;
+    // ...actualiza this.books
+  }
+
+  updateBook(book: IBook) {
+    // Llama al servicio para actualizar, luego refresca el listado
+    // ...actualiza this.books
+  }
+
+  removeBook(id: number) {
+    // Llama al servicio para eliminar, luego refresca el listado
+    // ...actualiza this.books
+  }
+
+  cancelAdd() {
+    this.addingNew = false;
+  }  
 }
