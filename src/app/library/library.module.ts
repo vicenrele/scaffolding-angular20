@@ -10,7 +10,7 @@ import { CoreModule } from '../core/core.module';
   imports: [
     CommonModule,
     LibraryRoutingModule,
-    CoreModule
+    CoreModule.forRoot(false) // Use InMemoryBookService by default
   ],
   // providers: [
   //   { provide: IBookService, useClass: InMemoryBookService },
