@@ -1,0 +1,30 @@
+table {
+  width: 100%;
+}
+
+.mat-card {
+  margin: 24px auto;
+  max-width: 900px;
+  padding: 24px;
+}
+
+.mat-table {
+  margin-bottom: 16px;
+}
+
+.mat-header-cell,
+.mat-cell {
+  padding: 8px 16px;
+}
+
+.no-books {
+  text-align: center;
+  color: #888;
+  margin: 24px 0;
+}
+
+mat-paginator {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}

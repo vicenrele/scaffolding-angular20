@@ -1,22 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { IBook } from '../../core/models/book.model';
 import { IBookService } from '../../core/services/ibook.service';
-
 import { CommonModule } from '@angular/common';
+import { BookListComponent } from './book-list/book-list.component';
 
 @Component({
   selector: 'app-library',
   template: `
     <h2>Library works!</h2>
-    <ul>
-      <li *ngFor="let book of books">{{ book.title }} - {{ book.author }} - 
-                                     {{ book.year }} - {{ book.genre }}
-      </li>
-      <li *ngIf="books.length === 0">No books available</li>
-      
-    </ul>
+    <app-book-list [books]="books"></app-book-list>
   `,
-  imports: [CommonModule]
+  standalone: true,
+  imports: [CommonModule, BookListComponent]
 })
 export class LibraryComponent implements OnInit {
   books: IBook[] = [];
