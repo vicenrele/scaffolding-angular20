@@ -3,6 +3,7 @@ import { IBook } from '../../core/models/book.model';
 import { IBookService } from '../../core/services/ibook.service';
 import { CommonModule } from '@angular/common';
 import { BookListComponent } from './book-list/book-list.component';
+import { InMemoryBookService } from '../../core/services/in-memory-book.service';
 
 @Component({
   selector: 'app-library',
@@ -11,7 +12,10 @@ import { BookListComponent } from './book-list/book-list.component';
     <app-book-list [books]="books"></app-book-list>
   `,
   standalone: true,
-  imports: [CommonModule, BookListComponent]
+  imports: [CommonModule, BookListComponent],
+  providers: [
+    { provide: IBookService, useClass: InMemoryBookService } // Use InMemoryBookService by default
+  ]
 })
 export class LibraryComponent implements OnInit {
   books: IBook[] = [];

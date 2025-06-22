@@ -7,6 +7,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { IBook } from '../../../core/models/book.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
+import { InMemoryBookService } from '../../../core/services/in-memory-book.service';
+import { IBookService } from '../../../core/services/ibook.service';
 
 @Component({
   selector: 'app-book-list',
@@ -31,8 +33,19 @@ export class BookListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  constructor(private bookService: InMemoryBookService) {}
+
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<IBook>(this.books);
+    this.bookService.getBooks().subscribe(books => {
+      this.books = books;
+      this.dataSource.data = books;
+      // Si usas paginador
+      if (this.paginator) {
+        this.dataSource.paginator = this.paginator;
+      }
+    });    
+    // this.loadBooks();
+    // this.dataSource = new MatTableDataSource<IBook>(this.books);
   }
 
   ngOnChanges() {
@@ -46,21 +59,33 @@ export class BookListComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  loadBooks() {
+    this.bookService.getBooks().subscribe(books => {
+      this.books = books;
+    });
+  }
+
   // Métodos para manejar añadir, editar y eliminar
   addBook(book: IBook) {
-    // Aquí llama al servicio para guardar, luego refresca el listado
-    this.addingNew = false;
-    // ...actualiza this.books
+    // Llama al servicio para guardar, luego refresca el listado
+    this.bookService.addBook(book).subscribe(() => {
+      this.addingNew = false;
+      this.loadBooks();
+    });
   }
 
   updateBook(book: IBook) {
     // Llama al servicio para actualizar, luego refresca el listado
-    // ...actualiza this.books
+    this.bookService.updateBook(book).subscribe(() => {
+      this.loadBooks();
+    });
   }
 
   removeBook(id: number) {
     // Llama al servicio para eliminar, luego refresca el listado
-    // ...actualiza this.books
+    this.bookService.deleteBook(id).subscribe(() => {
+      this.loadBooks();
+    });
   }
 
   cancelAdd() {

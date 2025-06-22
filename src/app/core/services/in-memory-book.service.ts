@@ -4,7 +4,7 @@ import { IBook } from '../models/book.model';
 import { IBookService } from './ibook.service';
 import { map } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class InMemoryBookService extends IBookService {
   private books$ = new BehaviorSubject<IBook[]>([
     { id: 1, title: '1984', author: 'George Orwell', year: 1949, genre: 'Dystopia' },
