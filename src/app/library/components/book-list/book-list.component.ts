@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -8,6 +8,7 @@ import { IBook } from '../../../core/models/book.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { IBookService } from '../../../core/services/ibook.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-book-list',
@@ -32,7 +33,11 @@ export class BookListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private bookService: IBookService, private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private bookService: IBookService, 
+    private cdRef: ChangeDetectorRef,
+    @Inject(NotificationService) private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.bookService.getBooks().subscribe(books => {
@@ -69,24 +74,40 @@ export class BookListComponent implements OnInit, AfterViewInit {
   // Métodos para manejar añadir, editar y eliminar
   addBook(book: IBook) {
     // Llama al servicio para guardar, luego refresca el listado
-    this.bookService.addBook(book).subscribe(() => {
-      this.addingNew = false;
-      this.loadBooks();
+    this.bookService.addBook(book).subscribe({
+      next: () => {
+        this.notificationService.success('Libro añadido correctamente.'),
+        this.addingNew = false;
+        this.loadBooks();        
+      },
+      error: () => this.notificationService.error('Error añadiendo el libro.')
     });
   }
 
   updateBook(book: IBook) {
-    // Llama al servicio para actualizar, luego refresca el listado
-    this.bookService.updateBook(book).subscribe(() => {
-      this.loadBooks();
+    this.bookService.updateBook(book).subscribe({
+      next: () => {
+        this.notificationService.success('Libro añadido correctamente.'),
+        this.loadBooks();        
+      },
+      error: () => this.notificationService.error('Error añadiendo el libro.')
     });
   }
 
-  removeBook(id: number) {
-    // Llama al servicio para eliminar, luego refresca el listado
-    this.bookService.deleteBook(id).subscribe(() => {
-      this.loadBooks();
-    });
+  async removeBook(id: number) {
+    const confirmed = await this.notificationService.confirm('¿Deseas eliminar este libro?');
+
+    if (!confirmed) {
+      this.notificationService.info('Eliminación cancelada.');
+      return;
+    }
+    this.bookService.deleteBook(id).subscribe({
+      next: () => {
+        this.notificationService.success('Libro añadido correctamente.'),
+        this.loadBooks();        
+      },
+      error: () => this.notificationService.error('Error eliminando el libro.')
+    });    
   }
 
   cancelAdd() {
