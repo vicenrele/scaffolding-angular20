@@ -10,6 +10,7 @@
   </app-book-detail>
   <div *ngIf="books.length > 0; else noBooks">
     <ng-container *ngFor="let book of dataSource.filteredData">
+    <!-- <ng-container *ngFor="let book of dataSource._pageData(dataSource.filteredData)">  -->
       <app-book-detail
         [book]="book"
         (save)="updateBook($event)"

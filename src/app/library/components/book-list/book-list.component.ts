@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -32,30 +32,32 @@ export class BookListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private bookService: IBookService) {}
+  constructor(private bookService: IBookService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.bookService.getBooks().subscribe(books => {
       this.books = books;
       this.dataSource.data = books;
       // Vuelve a asignar el paginador tras actualizar los datos
-      if (this.paginator) {
-        this.dataSource.paginator = this.paginator;
-        // Opcional: volver a la primera página al actualizar la lista
-        this.paginator.firstPage();
-      }      
+      // if (this.paginator) {
+      //   this.dataSource.paginator = this.paginator;
+      //   // Opcional: volver a la primera página al actualizar la lista
+      //   this.paginator.firstPage();
+      // }      
     });
   }
 
   ngOnChanges() {
     this.dataSource = new MatTableDataSource<IBook>(this.books);
-    if (this.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
+    // this.cdRef.detectChanges();
+    // if (this.paginator) {
+    //   this.dataSource.paginator = this.paginator;
+    // }
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    // this.cdRef.detectChanges();
   }
 
   loadBooks() {
