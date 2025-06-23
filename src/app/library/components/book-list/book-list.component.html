@@ -16,8 +16,8 @@
         (delete)="removeBook($event)">
       </app-book-detail>
     </ng-container>
-    <mat-paginator [length]="books.length"
-                   [pageSize]="5"
+    <mat-paginator [length]="dataSource.filteredData.length"
+                   [pageSize]="dataSource.paginator?.pageSize || 5"
                    [pageSizeOptions]="[5, 10, 20]">
     </mat-paginator>
   </div>

@@ -7,7 +7,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { IBook } from '../../../core/models/book.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
-import { InMemoryBookService } from '../../../core/services/in-memory-book.service';
 import { IBookService } from '../../../core/services/ibook.service';
 
 @Component({
@@ -33,19 +32,19 @@ export class BookListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private bookService: InMemoryBookService) {}
+  constructor(private bookService: IBookService) {}
 
   ngOnInit() {
     this.bookService.getBooks().subscribe(books => {
       this.books = books;
       this.dataSource.data = books;
-      // Si usas paginador
+      // Vuelve a asignar el paginador tras actualizar los datos
       if (this.paginator) {
         this.dataSource.paginator = this.paginator;
-      }
-    });    
-    // this.loadBooks();
-    // this.dataSource = new MatTableDataSource<IBook>(this.books);
+        // Opcional: volver a la primera página al actualizar la lista
+        this.paginator.firstPage();
+      }      
+    });
   }
 
   ngOnChanges() {
