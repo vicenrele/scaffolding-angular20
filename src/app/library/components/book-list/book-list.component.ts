@@ -40,16 +40,16 @@ export class BookListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.bookService.getBooks().subscribe(books => {
-      this.books = books;
-      this.dataSource.data = books;
+    // this.bookService.getBooks().subscribe(books => {
+    //   this.books = books;
+    //   this.dataSource.data = books;
       // Vuelve a asignar el paginador tras actualizar los datos
       // if (this.paginator) {
       //   this.dataSource.paginator = this.paginator;
       //   // Opcional: volver a la primera página al actualizar la lista
       //   this.paginator.firstPage();
       // }      
-    });
+    // });
   }
 
   ngOnChanges() {
@@ -68,6 +68,7 @@ export class BookListComponent implements OnInit, AfterViewInit {
   loadBooks() {
     this.bookService.getBooks().subscribe(books => {
       this.books = books;
+      this.dataSource.data = books;
     });
   }
 

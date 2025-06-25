@@ -9,7 +9,7 @@ import { CoreModule } from '../core/core.module';
   imports: [
     CommonModule,
     LibraryRoutingModule,
-    CoreModule.forRoot(false), // Use InMemoryBookService by default
+    CoreModule.forRoot(), // Use InMemoryBookService by default: false
     MatTableModule,
     MatPaginatorModule
   ]

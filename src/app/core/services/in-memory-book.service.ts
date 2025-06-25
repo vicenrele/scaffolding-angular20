@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class InMemoryBookService extends IBookService {
   private books$ = new BehaviorSubject<IBook[]>([
-    { id: 1, title: '1984', author: 'George Orwell', year: 1949, genre: 'Dystopia' },
     { id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960, genre: 'Fiction' },
     { id: 3, title: 'Brave New World', author: 'Aldous Huxley', year: 1932, genre: 'Science Fiction' },
     { id: 4, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', year: 1925, genre: 'Classic' },

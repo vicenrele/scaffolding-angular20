@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class HttpBookService extends IBookService {
-  private apiUrl = 'https://mockapi.io/books'; // Cambia la URL por tu mock REST API
+  private apiUrl = 'https://mybooksapi-74bc9-default-rtdb.europe-west1.firebasedatabase.app/books.json';
 
   constructor(private http: HttpClient) { super(); }
 
@@ -29,4 +29,5 @@ export class HttpBookService extends IBookService {
   deleteBook(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
 }
