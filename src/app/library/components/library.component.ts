@@ -4,6 +4,8 @@ import { IBookService } from '../../core/services/ibook.service';
 import { CommonModule } from '@angular/common';
 import { BookListComponent } from './book-list/book-list.component';
 import { InMemoryBookService } from '../../core/services/in-memory-book.service';
+import { HttpBookService } from '../../core/services/http-book.service';
+import { UtilService } from '../../core/services/util.service';
 
 @Component({
   selector: 'app-library',
@@ -14,17 +16,21 @@ import { InMemoryBookService } from '../../core/services/in-memory-book.service'
   standalone: true,
   imports: [CommonModule, BookListComponent],
   providers: [
-    { provide: IBookService, useClass: InMemoryBookService } // Use InMemoryBookService by default
+    { provide: IBookService, useClass: HttpBookService } // InMemoryBookService by default
   ]
 })
 export class LibraryComponent implements OnInit {
   books: IBook[] = [];
 
   constructor(
-    @Inject(IBookService) private bookService: IBookService
+    @Inject(IBookService) private bookService: IBookService, 
+    private utilService: UtilService
   ) {}
 
   ngOnInit() {
-    this.bookService.getBooks().subscribe((books: IBook[]) => this.books = books);
+    this.bookService.getBooks().subscribe((books: IBook[]) =>{
+      this.books = this.utilService.convertObjectToIBookArray(books);
+    });
   }
+
 }
