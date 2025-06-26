@@ -39,8 +39,7 @@ export class BookListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private bookService: IBookService, 
-    private cdRef: ChangeDetectorRef,
+    private bookService: IBookService,
     @Inject(NotificationService) private notificationService: NotificationService
   ) {}
 
@@ -60,15 +59,10 @@ export class BookListComponent implements OnInit, AfterViewInit {
   ngOnChanges() {
     this.dataSource = new MatTableDataSource<IBook>(this.books);
     this.dataSource.paginator = this.paginator;
-    // this.cdRef.detectChanges();
-    // if (this.paginator) {
-    //   this.dataSource.paginator = this.paginator;
-    // }
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    // this.cdRef.detectChanges();
   }
 
   startEdit(bookId: number) {
