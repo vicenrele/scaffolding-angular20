@@ -4,10 +4,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { IBook } from '../../../core/models/book.model';
+import { IBook } from '../../models/book.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
-import { IBookService } from '../../../core/services/ibook.service';
+import { IBookService } from '../../services/ibook.service';
 import { NotificationService } from '../../../core/services/notification.service';
 import { MatIconModule } from '@angular/material/icon';
 

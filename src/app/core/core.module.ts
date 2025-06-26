@@ -1,7 +1,7 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
-import { IBookService } from './services/ibook.service';
-import { InMemoryBookService } from './services/in-memory-book.service';
-import { HttpBookService } from './services/http-book.service';
+import { IBookService } from '../library/services/ibook.service';
+import { InMemoryBookService } from '../library/services/in-memory-book.service';
+import { HttpBookService } from '../library/services/http-book.service';
 
 @NgModule({
   providers: [
