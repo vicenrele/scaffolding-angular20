@@ -44,6 +44,8 @@ export class BookListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    this.dataSource = new MatTableDataSource<IBook>(this.books);
+    this.dataSource.paginator = this.paginator;
     // this.bookService.getBooks().subscribe(books => {
     //   this.books = books;
     //   this.dataSource.data = books;

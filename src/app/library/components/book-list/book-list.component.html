@@ -1,7 +1,11 @@
 <mat-card>
   <mat-card-title>Books</mat-card-title>
   <mat-divider></mat-divider>
-  <button mat-raised-button color="primary" (click)="addingNew = true" *ngIf="!addingNew">Add Book</button>
+  <mat-card-content>
+      <button mat-raised-button color="primary" (click)="addingNew = true" *ngIf="!addingNew">
+        Add Book
+      </button>
+  </mat-card-content>
   <app-book-detail
     *ngIf="addingNew"
     [isNew]="true"
