@@ -16,13 +16,17 @@ export class CoreModule {
     }
   }
 
-  static forRoot(useHttp: boolean = false): ModuleWithProviders<CoreModule> {
+
+  static forRoot(provider: 'http' | 'memory' = 'memory'): ModuleWithProviders<CoreModule> {
+    let useClass;
+    switch (provider) {
+      case 'http': useClass = HttpBookService; break;
+      default: useClass = InMemoryBookService;
+    }
     return {
       ngModule: CoreModule,
       providers: [
-        useHttp
-          ? { provide: IBookService, useClass: HttpBookService}
-          : { provide: IBookService, useClass: InMemoryBookService }
+        { provide: IBookService, useClass }
       ]
     };
   }

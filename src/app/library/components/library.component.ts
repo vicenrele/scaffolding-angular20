@@ -16,7 +16,7 @@ import { UtilService } from '../../core/services/util.service';
   standalone: true,
   imports: [CommonModule, BookListComponent],
   providers: [
-    { provide: IBookService, useClass: HttpBookService } // InMemoryBookService by default
+    { provide: IBookService, useClass: InMemoryBookService } // InMemoryBookService by default
   ]
 })
 export class LibraryComponent implements OnInit {
