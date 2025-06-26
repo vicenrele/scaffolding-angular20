@@ -39,19 +39,11 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let book">
-          <!-- <ng-container *ngIf="editingBookId !== book.id; else editMode">
-            <button mat-button color="primary" (click)="startEdit(book.id)">Edit</button>
-            <button mat-icon-button color="warn" (click)="removeBook(book.id)" aria-label="Delete">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </ng-container>
-          <ng-template #editMode> -->
             <app-book-detail
               [book]="book"
               (delete)="removeBook(book.id)"
               (save)="onEditSave($event)">
             </app-book-detail>
-          <!-- </ng-template> -->
         </td>
       </ng-container>
 

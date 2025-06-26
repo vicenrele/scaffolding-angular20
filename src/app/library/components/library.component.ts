@@ -10,7 +10,6 @@ import { UtilService } from '../../core/services/util.service';
 @Component({
   selector: 'app-library',
   template: `
-    <h2>Library works!</h2>
     <app-book-list [books]="books"></app-book-list>
   `,
   standalone: true,

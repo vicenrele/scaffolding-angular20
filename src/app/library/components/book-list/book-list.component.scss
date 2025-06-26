@@ -1,4 +1,4 @@
-// Variables de color y breakpoints para fácil ajuste
+// Variables of color and breakpoints for easy adjustment
 $primary: #283593; // Indigo darken-3
 $accent: #1565c0;  // Blue darken-3
 $background: #f5f7fa;
@@ -76,7 +76,7 @@ $shadow: 0 8px 24px rgba(40, 53, 147, 0.10);
   }
 }
 
-// Responsive: tarjetas en móvil
+// Responsive: mobile cards
 @include mobile {
   .mat-table, .mat-header-row, .mat-row, .mat-header-cell, .mat-cell {
     display: block;
@@ -108,7 +108,7 @@ $shadow: 0 8px 24px rgba(40, 53, 147, 0.10);
   }
 }
 
-// Botones y paginador
+// Buttons and paginator
 button[mat-raised-button] {
   margin: 10px 0 20px 0;
   font-weight: 600;
@@ -138,7 +138,11 @@ button[mat-raised-button] {
   font-size: 1.1rem;
 }
 
-// Paginador
+mat-card-title {
+  text-align: center;
+}
+
+// Paginator
 mat-paginator {
   margin-top: 16px;
   display: flex;
@@ -160,7 +164,7 @@ mat-divider {
   border-top: 2px solid #e3e6ef;
 }
 
-// Book detail (si quieres que los detalles también sean elegantes)
+// Book detail
 app-book-detail {
   margin: 0 0 10px 0;
   display: block;

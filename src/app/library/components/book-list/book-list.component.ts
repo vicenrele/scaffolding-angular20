@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, Inject } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -115,7 +115,7 @@ export class BookListComponent implements OnInit, AfterViewInit {
     }
     this.bookService.deleteBook(id).subscribe({
       next: () => {
-        this.notificationService.success('Libro añadido correctamente.'),
+        this.notificationService.success('Libro eliminado correctamente.'),
         this.loadBooks();        
       },
       error: () => this.notificationService.error('Error eliminando el libro.')
