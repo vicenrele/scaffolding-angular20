@@ -59,6 +59,7 @@ export class BookListComponent implements OnInit, AfterViewInit {
 
   ngOnChanges() {
     this.dataSource = new MatTableDataSource<IBook>(this.books);
+    this.dataSource.paginator = this.paginator;
     // this.cdRef.detectChanges();
     // if (this.paginator) {
     //   this.dataSource.paginator = this.paginator;
@@ -90,9 +91,7 @@ export class BookListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // Métodos para manejar añadir, editar y eliminar
   addBook(book: IBook) {
-    // Llama al servicio para guardar, luego refresca el listado
     this.bookService.addBook(book).subscribe({
       next: () => {
         this.notificationService.success('Libro añadido correctamente.'),
