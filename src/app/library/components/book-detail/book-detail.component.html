@@ -25,12 +25,6 @@
     </div>
   </form>
   <ng-template #viewMode>
-    <div class="detail-info">
-      <strong>{{ book?.title }}</strong>
-      Author: {{ book?.author }}
-      Year: {{ book?.year }}
-      Genre: {{ book?.genre }}
-    </div>
     <div class="actions">
       <button mat-button (click)="startEdit()">Edit</button>
       <button mat-icon-button color="warn" (click)="onDelete()" aria-label="Delete">

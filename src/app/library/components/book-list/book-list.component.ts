@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { BookDetailComponent } from '../book-detail/book-detail.component';
 import { IBookService } from '../../../core/services/ibook.service';
 import { NotificationService } from '../../../core/services/notification.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-book-list',
@@ -19,6 +20,7 @@ import { NotificationService } from '../../../core/services/notification.service
     MatPaginatorModule,
     MatCardModule,
     MatDividerModule,
+    MatIconModule,
     BookDetailComponent
   ],
   templateUrl: './book-list.component.html',
@@ -28,8 +30,11 @@ export class BookListComponent implements OnInit, AfterViewInit {
   @Input() books: IBook[] = [];
 
   displayedColumns: string[] = ['id', 'title', 'author', 'year', 'genre'];
+  displayedColumnsWithActions: string[] = [...this.displayedColumns, 'actions'];
   dataSource = new MatTableDataSource<IBook>([]);
   addingNew: boolean = false;
+
+  editingBookId: number | null = null;  
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -63,6 +68,19 @@ export class BookListComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     // this.cdRef.detectChanges();
+  }
+
+  startEdit(bookId: number) {
+    this.editingBookId = bookId;
+  }
+
+  cancelEdit() {
+    this.editingBookId = null;
+  }
+
+  onEditSave(book: IBook) {
+    this.updateBook(book);
+    this.cancelEdit();
   }
 
   loadBooks() {
