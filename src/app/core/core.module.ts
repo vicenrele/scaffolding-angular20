@@ -9,6 +9,11 @@ import { HttpBookService } from '../library/services/http-book.service';
     { provide: IBookService, useClass: HttpBookService }
   ]
 })
+/**
+ * CoreModule is a singleton module that should be imported only once in the AppModule.
+ * It provides the core services and configurations for the application.
+ * This module is designed to be imported only in the AppModule to avoid multiple instances.
+ */
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
