@@ -1,59 +1,112 @@
-# ScaffoldingAngular20
+# scaffolding-angular20
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+`scaffolding-angular20` is a starter project for Angular 20 applications, prepared for development, testing, and server-side rendering (SSR) with Angular Universal and Express. It integrates modern building and testing tools, making it ideal for starting robust Angular apps.
 
-## Development server
+## Project Description
 
-To start a local development server, run:
+This project provides a complete structure for Angular applications, supporting live development, testing, production builds, and SSR with Node.js + Express.
 
-```bash
-ng serve
-```
+## Installation
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd scaffolding-angular20
+   ```
 
-## Code scaffolding
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Usage
 
-```bash
-ng generate component component-name
-```
+### Start in development mode
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Spin up an Angular development server:
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The app will be available by default at [http://localhost:4200](http://localhost:4200).
 
-## Running unit tests
+### Build the project
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Compile the application for production:
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+The output will be placed in the `dist/` folder.
 
-For end-to-end (e2e) testing, run:
+### Server-Side Rendering (SSR)
+
+Build and serve the SSR version:
 
 ```bash
-ng e2e
+npm run build
+npm run serve:ssr:scaffolding-angular20
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+This launches an Express server with Angular rendered on the server side.
 
-## Additional Resources
+### Testing
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Run unit tests with Jasmine and Karma:
+
+```bash
+npm test
+```
+
+### Watch for changes and auto-compile
+
+```bash
+npm run watch
+```
+
+Automatically recompiles the project in development mode on file changes.
+
+## Library Overview
+
+### Main dependencies (`dependencies`)
+
+- **@angular/core, @angular/common, @angular/forms, @angular/router, etc.:** Core components of the Angular framework for building SPA applications.
+- **@angular/material, @angular/cdk:** Material Design components and utilities for building modern UIs.
+- **@angular/platform-browser, @angular/platform-server, @angular/ssr:** Enable browser and server-side rendering (SSR) with Angular Universal.
+- **rxjs:** Reactive programming and data stream management.
+- **express:** Web framework for Node.js, used to serve the SSR application.
+- **tslib:** TypeScript runtime library to reduce the size of generated code.
+- **zone.js:** Async context tracking, key for Angular's change detection.
+
+### Development dependencies (`devDependencies`)
+
+- **@angular/cli:** Command-line tool for managing, creating, and building Angular projects.
+- **@angular/build, @angular/compiler-cli:** Advanced build and compilation tools for Angular.
+- **typescript:** The project's base language.
+- **@types/node, @types/express, @types/jasmine:** Type definitions to enhance TypeScript development.
+- **jasmine-core:** Unit testing framework.
+- **karma, karma-chrome-launcher, karma-coverage, karma-jasmine, karma-jasmine-html-reporter:** Tools to run tests in browsers, generate reports, and track coverage.
+- **@types/jasmine:** TypeScript types for Jasmine.
+
+## Available Scripts
+
+- `npm start`: Starts the Angular development server.
+- `npm run build`: Compiles the app for production.
+- `npm run watch`: Compiles and watches for changes in development mode.
+- `npm test`: Runs unit tests with Karma + Jasmine.
+- `npm run serve:ssr:scaffolding-angular20`: Serves the Angular app rendered on the server with Express.
+
+## Requirements
+
+- Node.js >= 18.x recommended
+- npm >= 9.x
+- Angular CLI 20.x
+
+## License
+
+Private project. Contact the author for usage permissions.
+
+---
+Questions or suggestions? Open an issue or contact the maintainer.
