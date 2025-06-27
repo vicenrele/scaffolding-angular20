@@ -6,6 +6,12 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class InMemoryBookService extends IBookService {
+  /**
+   * In-memory book data source.
+   * This is a mock data source that simulates a book database.
+   * It is used for development and testing purposes.
+   * In a real application, this would be replaced with a service that interacts with a backend API.
+   */
   private books$ = new BehaviorSubject<IBook[]>([
     { id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee', year: 1960, genre: 'Fiction' },
     { id: 3, title: 'Brave New World', author: 'Aldous Huxley', year: 1932, genre: 'Science Fiction' },
@@ -23,14 +29,28 @@ export class InMemoryBookService extends IBookService {
     { id: 15, title: 'The Stranger', author: 'Albert Camus', year: 1942, genre: 'Existentialism' }
   ]);
 
+  /**
+   * Retrieves the list of books as an observable.
+   * @returns An observable of the list of books.
+   */
   getBooks(): Observable<IBook[]> {
     return this.books$.asObservable();
   }
 
+  /**
+   * Retrieves a book by its ID.
+   * @param id The ID of the book to retrieve.
+   * @returns An observable of the book, or undefined if not found.
+   */
   getBook(id: number): Observable<IBook | undefined> {
     return this.books$.pipe(map(books => books.find(b => b.id === id)));
   }
 
+  /**
+   * Adds a new book to the collection.
+   * @param book The book to add.
+   * @returns An observable of the added book.
+   */
   addBook(book: IBook): Observable<IBook> {
     const current = this.books$.value;
     const newBook = { ...book, id: Date.now() };
@@ -38,6 +58,11 @@ export class InMemoryBookService extends IBookService {
     return of(newBook);
   }
 
+  /**
+   * Updates an existing book in the collection.
+   * @param book The book to update.
+   * @returns An observable of the updated book.
+   */
   updateBook(book: IBook): Observable<IBook> {
     const current = this.books$.value;
     const idx = current.findIndex(b => b.id === book.id);
@@ -48,6 +73,11 @@ export class InMemoryBookService extends IBookService {
     return of(book);
   }
 
+  /**
+   * Deletes a book from the collection.
+   * @param id The ID of the book to delete.
+   * @returns An observable of the deletion response.
+   */
   deleteBook(id: number): Observable<void> {
     this.books$.next(this.books$.value.filter(b => b.id !== id));
     return of(void 0);

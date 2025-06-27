@@ -18,18 +18,31 @@ import { HttpBookService } from '../services/http-book.service';
   ]
 })
 export class LibraryComponent implements OnInit {
+  /**
+   * The list of books to display in the library.
+   * This will be populated by the book service when the component initializes.
+   */
   books: IBook[] = [];
 
   constructor(
     @Inject(IBookService) private bookService: IBookService,
   ) {}
 
+  /**
+   * Initialize the component and load books from the book service.
+   * This method subscribes to the book service to get the list of books
+   * and converts the data to an array of IBook objects.
+   */
   ngOnInit() {
     this.bookService.getBooks().subscribe((books: IBook[]) =>{
       this.books = this.convertObjectToIBookArray(books);
     });
   }
 
+  /**
+   * @param data The data to convert, which can be an object or an array.
+   * @returns An array of IBook objects.
+   */
   convertObjectToIBookArray(data: any): IBook[] {
     if (data !== null && typeof data === 'object' && !Array.isArray(data)) {
       return Object.values(data) as IBook[];

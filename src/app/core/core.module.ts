@@ -16,7 +16,10 @@ export class CoreModule {
     }
   }
 
-
+  /**
+   * Configures the CoreModule with a specific book service provider.
+   * @param provider The book service provider to use ('http' or 'memory').
+   */
   static forRoot(provider: 'http' | 'memory' = 'memory'): ModuleWithProviders<CoreModule> {
     let useClass;
     switch (provider) {
